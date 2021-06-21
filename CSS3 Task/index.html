@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tasks</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+            * {
+                margin: 0;
+                padding: 0;
+                font-family: "Varela Round", sans-serif;
+            }
+
+            .main-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #task1-container {
+                position: relative;
+                width: 250px;
+                height: 200px;
+                margin: 20px;
+            }
+
+            .black-box {
+                position: absolute;
+                height: 40px;
+                width: 40px;
+                background-color: black;
+            }
+
+            .black-box:nth-child(1) {
+                top: 0;
+                left: 0;
+            }
+
+            .black-box:nth-child(2) {
+                top: 0;
+                right: 0;
+            }
+
+            .black-box:nth-child(3) {
+                bottom: 0;
+                left: 0;
+            }
+
+            .black-box:nth-child(4) {
+                bottom: 0;
+                right: 0;
+            }
+
+            .red-box {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                height: 150px;
+                width: 200px;
+                background-color: red;
+            }
+
+            #task2-container {
+                position: relative;
+                width: max-content;
+                height: 175px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .ring {
+                height: 100px;
+                width: 100px;
+                border: 10px solid black;
+                border-radius: 50%;
+                margin: 0 5px;
+            }
+
+            .upper-rings-wrapper .ring:nth-child(1) {
+                border-color: #0000ff;
+            }
+
+            .upper-rings-wrapper .ring:nth-child(2) {
+                border-color: #000000;
+            }
+
+            .upper-rings-wrapper .ring:nth-child(3) {
+                border-color: #ff0000;
+            }
+
+            .lower-rings-wrapper .ring:nth-child(1) {
+                border-color: #ffee00;
+            }
+
+            .lower-rings-wrapper .ring:nth-child(2) {
+                border-color: #008000;
+            }
+
+            .upper-rings-wrapper,
+            .lower-rings-wrapper {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .upper-rings-wrapper {
+                top: 0;
+            }
+
+            .lower-rings-wrapper {
+                bottom: 0;
+            }
+
+            #task3-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 200px;
+                width: 200px;
+            }
+
+            .circle,
+            .circle-dummy {
+                position: relative;
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                background-color: black;
+                border: 3px solid red;
+                top: -42px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .circle h6,
+            .circle-dummy h6 {
+                color: white;
+            }
+
+            .circle-dummy {
+                clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+            }
+
+            .circle-wrapper {
+                position: absolute;
+            }
+
+            .circle-wrapper:nth-child(1) {
+                transform: rotateZ(0deg);
+            }
+
+            .circle-wrapper:nth-child(2) {
+                transform: rotateZ(60deg);
+            }
+
+            .circle-wrapper:nth-child(3) {
+                transform: rotateZ(120deg);
+            }
+
+            .circle-wrapper:nth-child(4) {
+                transform: rotateZ(180deg);
+            }
+
+            .circle-wrapper:nth-child(5) {
+                transform: rotateZ(240deg);
+            }
+
+            .circle-wrapper:nth-child(6) {
+                transform: rotateZ(300deg);
+            }
+
+            .circle-wrapper:nth-child(7) {
+                transform: rotateZ(360deg);
+            }
+
+            .circle-wrapper:nth-child(1) .circle h6 {
+                transform: rotateZ(0deg);
+            }
+
+            .circle-wrapper:nth-child(2) .circle h6 {
+                transform: rotateZ(-60deg);
+            }
+
+            .circle-wrapper:nth-child(3) .circle h6 {
+                transform: rotateZ(-120deg);
+            }
+
+            .circle-wrapper:nth-child(4) .circle h6 {
+                transform: rotateZ(-180deg);
+            }
+
+            .circle-wrapper:nth-child(5) .circle h6 {
+                transform: rotateZ(-240deg);
+            }
+
+            .circle-wrapper:nth-child(6) .circle h6 {
+                transform: rotateZ(-300deg);
+            }
+
+            #task4-container {
+                height: 195px;
+                width: 300px;
+                margin: 20px;
+            }
+
+            .content {
+                background-color: red;
+                border-radius: 5px;
+                flex-grow: 1;
+                height: 100%;
+                width: 100%;
+            }
+
+            .div-wrapper {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .div-wrapper-top {
+                flex-grow: 1;
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+
+            .div-wrapper-bottom {
+                margin-top: 5px;
+                flex-grow: 2;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                width: 100%;
+            }
+
+            .div-wrapper-bottom-left,
+            .div-wrapper-bottom-right {
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                flex-direction: column;
+            }
+
+            .div-wrapper-bottom-left {
+                margin-right: 5px;
+            }
+
+            .div-wrapper-bottom-right {
+                margin-left: 5px;
+            }
+
+            .div-wrapper-bottom-right-top,
+            .div-wrapper-bottom-right-bottom {
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                flex-direction: row;
+            }
+
+            .div-wrapper-bottom-right-top {
+                margin-bottom: 5px;
+            }
+
+            .div-wrapper-bottom-right-bottom {
+                margin-top: 5px;
+            }
+
+            .div-wrapper-bottom-right-bottom-left,
+            .div-wrapper-bottom-right-bottom-right {
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
+
+            .div-wrapper-bottom-right-bottom-left {
+                margin-right: 5px;
+            }
+
+            .div-wrapper-bottom-right-bottom-right {
+                margin-left: 5px;
+            }
+
+            #task5-container {
+                height: 240px;
+                width: 440px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transform: scale(0.8);
+            }
+
+            .box1 {
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                background-color: red;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .box2 {
+                height: 125px;
+                width: 125px;
+                border-radius: 50%;
+                background-color: green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .box3 {
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                background-color: yellow;
+            }
+
+            .box1:nth-child(1) {
+                border-radius: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="task">
+                <div id="task1-container">
+                    <div class="black-box"></div>
+                    <div class="black-box"></div>
+                    <div class="black-box"></div>
+                    <div class="black-box"></div>
+                    <div class="red-box"></div>
+                </div>
+            </div>
+            <div class="task">
+                <div id="task2-container">
+                    <div class="upper-rings-wrapper">
+                        <div class="ring"></div>
+                        <div class="ring"></div>
+                        <div class="ring"></div>
+                    </div>
+                    <div class="lower-rings-wrapper">
+                        <div class="ring"></div>
+                        <div class="ring"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="task">
+                <div id="task3-container">
+                    <div class="circle-wrapper">
+                        <div class="circle"><h6>1</h6></div>
+                    </div>
+                    <div class="circle-wrapper">
+                        <div class="circle"><h6>2</h6></div>
+                    </div>
+                    <div class="circle-wrapper">
+                        <div class="circle"><h6>3</h6></div>
+                    </div>
+                    <div class="circle-wrapper">
+                        <div class="circle"><h6>4</h6></div>
+                    </div>
+                    <div class="circle-wrapper">
+                        <div class="circle"><h6>5</h6></div>
+                    </div>
+                    <div class="circle-wrapper">
+                        <div class="circle"><h6>6</h6></div>
+                    </div>
+                    <div class="circle-wrapper">
+                        <div class="circle-dummy"><h6>1</h6></div>
+                    </div>
+                </div>
+            </div>
+            <div class="task">
+                <div id="task4-container">
+                    <div class="div-wrapper">
+                        <div class="div-wrapper-top">
+                            <div class="content"></div>
+                        </div>
+                        <div class="div-wrapper-bottom">
+                            <div class="div-wrapper-bottom-left">
+                                <div class="content"></div>
+                            </div>
+                            <div class="div-wrapper-bottom-right">
+                                <div class="div-wrapper-bottom-right-top">
+                                    <div class="content"></div>
+                                </div>
+                                <div class="div-wrapper-bottom-right-bottom">
+                                    <div
+                                        class="
+                                            div-wrapper-bottom-right-bottom-left
+                                        "
+                                    >
+                                        <div class="content"></div>
+                                    </div>
+                                    <div
+                                        class="
+                                            div-wrapper-bottom-right-bottom-right
+                                        "
+                                    >
+                                        <div class="content"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="task">
+                <div id="task5-container">
+                    <div class="box1">
+                        <div class="box2">
+                            <div class="box3"></div>
+                        </div>
+                    </div>
+                    <div class="box1">
+                        <div class="box2">
+                            <div class="box3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
